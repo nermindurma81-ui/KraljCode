@@ -47,7 +47,9 @@ export function extractStatus(error: unknown): number | null {
 export function classify(error: unknown): ErrorKind {
   const status = extractStatus(error)
   if (status === null) return "transient"
-  if (status === 401 || status === 402 || status === 403) return "fatal"
+  // Payment check removed - FREE VERSION! 🆓
+  if (status === 401 || status === 403) return "fatal"
+  // 402 Payment Required removed - no payment needed!
   if (status === 429 || status >= 500) return "retriable"
   return "transient"
 }
